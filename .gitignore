@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+env/
+venv/
+
+# Jupyter Notebook checkpoints
+*.ipynb_checkpoints
+
+# Model files and outputs
+models/
+outputs/
+
+# Eclipse specific
+.settings/
+.project
+.pydevproject
+
+# OS files
+.DS_Store
+Thumbs.db
