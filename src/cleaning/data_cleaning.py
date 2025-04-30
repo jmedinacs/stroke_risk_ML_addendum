@@ -17,10 +17,9 @@ Notes:
 """
 
 import pandas as pd
-
-
-import pandas as pd
 from pandas.tests.generic.test_label_or_level_utils import df
+import os 
+
 
 def load_raw_data(filepath):
     """Load raw stroke risk data."""
@@ -122,6 +121,7 @@ def remove_duplicates(df):
     after_rows = df.shape[0]
     print(f"Removed {before_rows - after_rows} duplicate rows.")
     return df    
+
     
     
     
