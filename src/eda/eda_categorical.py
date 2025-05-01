@@ -8,6 +8,7 @@ in the stroke risk dataset.
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
+from matplotlib.pyplot import legend
 
 def explore_categoricals(df, output_dir=None, show_plot=False):
     """
@@ -45,7 +46,8 @@ def plot_bar_chart(df, column, output_dir, show_plot=False):
     - show_plot (bool): Whether to display the chart
     """
     plt.figure(figsize=(8,5))
-    ax = sns.countplot(data=df, x=column, order=df[column].value_counts().index, palette="Blues")
+    ax = sns.countplot(data=df, x=column, 
+                       order=df[column].value_counts().index, color ='steelblue', legend=False)
     
     total = len(df)
     
