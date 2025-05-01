@@ -35,7 +35,8 @@ def run_chi_square_test(df):
         'ever_married',
         'work_type',
         'Residence_type',
-        'smoking_status'
+        'smoking_status',
+        'heart_disease'
     ]
     
     # Initialize a list to store results

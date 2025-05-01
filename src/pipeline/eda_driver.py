@@ -32,7 +32,7 @@ def run_eda():
     # ➤ Run chi-squared tests on categorical features vs. stroke
     chi_results = run_chi_square_test(data)
     print("\nChi-Square Test Results:")
-    print(chi_results)
+    print(chi_results[['feature','p_value','significant']])
     chi_results.to_csv("../../results/chi_square_summary.csv", index=False)
 
     # ➤ Run point-biserial correlations on continuous features vs. stroke

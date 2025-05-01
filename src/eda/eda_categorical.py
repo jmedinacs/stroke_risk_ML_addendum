@@ -36,7 +36,8 @@ def explore_categoricals(df, output_dir=None, show_plot=False):
         'ever_married',
         'work_type',
         'Residence_type',
-        'smoking_status'
+        'smoking_status',
+        'heart_disease'
     ]        
     
     for col in cat_columns:
