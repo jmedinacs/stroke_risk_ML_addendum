@@ -20,7 +20,7 @@ The dataset was cleaned using a modular Python pipeline. Key steps included:
 - **Text Standardization:** All object fields were lowercased and trimmed to avoid encoding errors.
 - **Duplicate Removal:** Dataset checked and confirmed to have no duplicate rows.
 
-Cleaning decisions are fully documented in the [Google Sheets cleaning log](#) (https://docs.google.com/spreadsheets/d/1pduhjQ3n5z88igfg-g8DmshraBieVE_CXnfD5TDrHlg/edit?usp=sharing).
+Cleaning decisions are fully documented in the [Google Sheets cleaning log](https://docs.google.com/spreadsheets/d/1pduhjQ3n5z88igfg-g8DmshraBieVE_CXnfD5TDrHlg/edit?usp=sharing).
 
 The dataset is now cleaned and ready for EDA and modeling.
 
