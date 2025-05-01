@@ -10,118 +10,143 @@ Date: 2025-04-28
 Project: Stroke Risk ML Addendum
 
 Notes:
-- Missing 'bmi' values will be imputed using the median, due to skewness in BMI distribution.
+- Missing 'bmi' values will be imputed using the median, due to skewness in the BMI distribution.
 - Rows with gender 'Other' will be removed due to extremely low occurrence.
-- Categorical variables will be encoded appropriately for modeling compatibility.
-- Raw data should be located at '../data/raw/stroke_data.csv' relative to script execution.
+- Categorical variables will be standardized for clean encoding.
 """
 
 import pandas as pd
-from pandas.tests.generic.test_label_or_level_utils import df
-import os 
+import os
 
-
-def load_raw_data(filepath):
-    """Load raw stroke risk data."""
-    data = pd.read_csv(filepath)
-    print(f"Data loaded: {data.shape[0]} rows, {data.shape[1]} columns")
-    return data
 
 def inspect_data(df):
-    """Print basic information about the dataset."""
+    """
+    Display dataset info, summary statistics, and missing values.
+
+    Parameters:
+    - df (DataFrame): Input dataset.
+
+    Returns:
+    - None
+    """
     print(df.info())
     print(df.describe())
     print(df.isnull().sum())
-    
+
+
 def clean_data(df):
-    """Apply all cleaning steps to the dataset."""
-    #1.
+    """
+    Run all data cleaning steps in sequence.
+
+    Parameters:
+    - df (DataFrame): Raw stroke dataset.
+
+    Returns:
+    - DataFrame: Cleaned dataset ready for EDA and modeling.
+    """
     
+    print("\nStarting cleaning process...")
+    
+    print("\nStep 1: Removing rare gender value 'Other' (single occurrence in dataset)")    
+    df = remove_rare_gender(df)
+    
+    print("\nStep 2: Imputing missing BMI values with median value.")
+    df = impute_missing_bmi(df)
+    
+    print("\nStep 3: Standardizing text fields (lowercase, trimmed)")
+    df = standardize_text_fields(df)
+    
+    print("\nStep 4: Removing duplicate rows")
+    df = remove_duplicates(df)
+    
+    print("\n\nData cleaning complete.")
+    return df
+
+
 def impute_missing_bmi(df):
     """
-    Fill missing BMI values using the median of the BMI column (28.1).
-    
+    Fill missing 'bmi' values using the median of the column.
+
     Parameters:
-    df (DataFrame): Input dataframe containing the stroke risk dataset.
-    
+    - df (DataFrame): Input dataset.
+
     Returns:
-    Dataframe: Updated dataframe with missing BMI values imputed.
+    - DataFrame: Dataset with missing BMI values imputed.
     """
-    
     median_bmi = df['bmi'].median()
     df['bmi'] = df['bmi'].fillna(median_bmi)
     print(f"Missing BMI values filled with median: {median_bmi:.2f}")
     return df
 
+
 def inspect_categorical_distribution(df):
     """
-    Inspect value distributions of all categorical (object-type) columns.
+    Print value counts and percentage breakdown for all categorical columns.
 
     Parameters:
-    df (DataFrame): Input dataframe containing the stroke risk dataset.
+    - df (DataFrame): Input dataset.
 
     Returns:
-    None
+    - None
     """
-    
     cat_cols = df.select_dtypes(include=['object']).columns
-    
     for col in cat_cols:
         print(f"Value counts for '{col}':")
         print(df[col].value_counts())
-        print("\n Percentage Breakdown:")
-        print(df[col].value_counts(normalize=True).round(4)*100)
+        print("\nPercentage breakdown:")
+        print((df[col].value_counts(normalize=True) * 100).round(2))
         print("-" * 50)
-        
+
+
 def remove_rare_gender(df):
     """
-    Remove rows where 'gender' is 'other', due to extreme rarity (exactly 1 occurrence)
-    
+    Remove rows where 'gender' is 'other', due to extreme rarity.
+
     Parameters:
-    df (DataFrame): Input dataframe containing the stroke risk dataset.
-    
+    - df (DataFrame): Input dataset.
+
     Returns:
-    DataFrame: Updated dataframe with rare gender category removed.
+    - DataFrame: Dataset with rare gender category removed.
     """
-    
     before_rows = df.shape[0]
-    df = df[df['gender']!= 'Other']
+    df = df[df['gender'] != 'Other'].copy()
     after_rows = df.shape[0]
-    print(f"Removed {before_rows - after_rows} rows with rate 'Other' gender value.")
+    print(f"Removed {before_rows - after_rows} rows with rare 'Other' gender value.")
     return df
-    
+
+
 def standardize_text_fields(df):
     """
-    Standardize all object (text) columns to lowercase and trimmed (remove leading/trailing spaces).
+    Convert all object columns to lowercase and strip whitespace.
 
     Parameters:
-    df (DataFrame): Input dataframe.
+    - df (DataFrame): Input dataset.
 
     Returns:
-    DataFrame: Updated dataframe with standardized text fields.
-    """    
+    - DataFrame: Dataset with cleaned text columns.
+    """
     cat_cols = df.select_dtypes(include=['object']).columns
     for col in cat_cols:
         df[col] = df[col].str.strip().str.lower()
-    print(f"Standardized text fields: lower case and trimmed for {len(cat_cols)} columns.")
+    print(f"Standardized {len(cat_cols)} text columns: lowercased and trimmed.")
     return df
-    
+
+
 def remove_duplicates(df):
     """
-    Identify and remove full-row duplicate records.
+    Drop duplicate rows from the dataset.
 
     Parameters:
-    df (DataFrame): Input dataframe.
+    - df (DataFrame): Input dataset.
 
     Returns:
-    DataFrame: Updated dataframe with duplicates removed.
+    - DataFrame: Dataset with duplicates removed.
     """
     before_rows = df.shape[0]
     df = df.drop_duplicates()
     after_rows = df.shape[0]
     print(f"Removed {before_rows - after_rows} duplicate rows.")
-    return df    
-
+    return df
     
     
     

@@ -2,7 +2,11 @@
 eda_categorical.py
 
 This module contains functions to visualize the distribution of categorical features
-in the stroke risk dataset.
+in the stroke risk dataset. Each plot is saved as a PNG file and optionally shown interactively.
+
+Author: John Medina
+Date: 2025-04-29
+Project: Stroke Risk ML Addendum
 """
 
 import matplotlib.pyplot as plt
@@ -12,12 +16,15 @@ from matplotlib.pyplot import legend
 
 def explore_categoricals(df, output_dir=None, show_plot=False):
     """
-    Visualizes frequency of each categorical feature in the dataset.
-    
+    Generate and save bar charts for categorical feature distributions.
+
     Parameters:
-    - df (DataFrame): Cleaned stroke dataset
-    - output_dir (str): Folder path to save plots (uses default if None)
-    - show_plot (bool): Whether to display the plots interactively
+    - df (DataFrame): Cleaned stroke dataset.
+    - output_dir (str): Folder path to save plots (default: '../../outputs/figures/').
+    - show_plot (bool): If True, display each chart interactively.
+
+    Returns:
+    - None
     """
     
     if output_dir is None:
@@ -37,13 +44,16 @@ def explore_categoricals(df, output_dir=None, show_plot=False):
         
 def plot_bar_chart(df, column, output_dir, show_plot=False):
     """
-    Plots a bar chart for a given categorical column.
+    Plot and save a bar chart showing distribution of a single categorical feature.
 
     Parameters:
-    - df (DataFrame): Cleaned stroke dataset
-    - column (str): Column to plot
-    - output_dir (str): Where to save the image
-    - show_plot (bool): Whether to display the chart
+    - df (DataFrame): Cleaned stroke dataset.
+    - column (str): Column to visualize.
+    - output_dir (str): Directory to save the PNG plot.
+    - show_plot (bool): Whether to display the chart interactively.
+
+    Returns:
+    - None
     """
     plt.figure(figsize=(8,5))
     ax = sns.countplot(data=df, x=column, 

@@ -1,8 +1,13 @@
-'''
-Created on Apr 30, 2025
+"""
+eda_target_distribution.py
 
-@author: jarpy
-'''
+This module visualizes and summarizes the distribution of the target variable (`stroke`)
+in the stroke risk dataset. It prints counts and percentages, and saves a labeled bar chart.
+
+Author: John Medina
+Date: 2025-04-30
+Project: Stroke Risk ML Addendum
+"""
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -34,7 +39,6 @@ def explore_target_feature(df, output_dir= None, show_plot=False):
     # Plot bar chart
     plt.figure(figsize=(6, 4))
     ax = sns.countplot(x='stroke', data=df, color=sns.color_palette('Set2')[0])
-
 
     for p in ax.patches:
         height = p.get_height()

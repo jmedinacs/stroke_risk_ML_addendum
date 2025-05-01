@@ -1,13 +1,33 @@
-'''
-Created on Apr 30, 2025
+"""
+eda_bivariate_and_chi_square.py
 
-@author: jarpy
-'''
+This module performs chi-squared tests of independence between categorical features 
+and the binary target variable `stroke`. It identifies which features have statistically 
+significant relationships with stroke occurrence and returns a ranked summary table.
+
+Author: John Medina
+Date: 2025-04-30
+Project: Stroke Risk ML Addendum
+"""
 
 import pandas as pd 
 from scipy.stats import chi2_contingency 
 
 def run_chi_square_test(df):
+    """
+    Run chi-squared tests between categorical features and the binary target (`stroke`).
+
+    Parameters:
+    - df (DataFrame): The cleaned dataset containing the target and categorical features.
+
+    Returns:
+    - DataFrame: A summary table including:
+        - feature name
+        - chi-squared statistic
+        - p-value
+        - degrees of freedom
+        - significance flag (True if p < 0.05)
+    """
     # Define the features to test
     features_to_test = [
         'gender',
