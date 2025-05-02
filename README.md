@@ -20,13 +20,13 @@ The dataset was cleaned using a modular Python pipeline. Key steps included:
 - **Text Standardization:** All object fields were lowercased and trimmed to avoid encoding errors.
 - **Duplicate Removal:** Dataset checked and confirmed to have no duplicate rows.
 
-Cleaning decisions are fully documented in the [Google Sheets cleaning log](https://docs.google.com/spreadsheets/d/1pduhjQ3n5z88igfg-g8DmshraBieVE_CXnfD5TDrHlg/edit?usp=sharing).
+Cleaning decisions are fully documented in the [Google Sheets cleaning log](#) (🔗 add your link here).
 
-The dataset is now cleaned and ready for EDA and modeling.
+✅ The dataset is now cleaned and ready for EDA and modeling.
 
 ---
 
-## 🔍 Exploratory Data Highlights
+## Exploratory Data Highlights
 
 ### Target Imbalance
 
@@ -57,7 +57,7 @@ Dropped features:
 
 ---
 
-## 🤖 Modeling Workflow
+## Modeling Workflow
 
 1. **Feature Selection**
    - Dropped `gender`, `Residence_type`, and `ID` based on chi-square results and interpretability.
@@ -73,27 +73,30 @@ Dropped features:
    - Applied SMOTE (Synthetic Minority Over-sampling Technique) to training data only.
    - Balanced the minority class (`stroke = 1`) to match the majority class in the training set.
 
-5. **Baseline Model**
-   - Trained a Logistic Regression model as the baseline classifier.
-   - Evaluation focused on performance for stroke detection (class 1), using:
-     - **Recall (stroke):** 48%
-     - **Precision (stroke):** 17%
-     - **F1 Score (stroke):** 25%
-     - **ROC AUC:** 0.79
+5. **Model Evaluation**
+   - Trained Logistic Regression, Random Forest, XGBoost, and KNN.
+   - XGBoost produced the strongest performance on both recall and overall ranking ability.
 
-### 📊 Confusion Matrix – Logistic Regression
+---
 
-Shows performance on the imbalanced **test set** after training on SMOTE-balanced data:
+### XGBoost – Best Performing Model
 
-![Confusion Matrix](select_viz/logistic_regression_confusion_matrix.png)
+Among all tested models, **XGBoost achieved the highest ROC AUC (0.81)** while matching Logistic Regression's 48% recall for stroke detection. This balance between sensitivity and ranking power makes it the most promising candidate for real-world use.
+
+**Performance on the Imbalanced Test Set:**
+- **Recall (stroke):** 48%
+- **Precision (stroke):** 18.8%
+- **F1 Score (stroke):** 27.0%
+- **ROC AUC:** 0.81
+
+![Confusion Matrix – XGBoost](select_viz/confusion_matrix_xgboost.png)
 
 ---
 
 ## 🚧 Status
 **Project In Progress**
 
-- Data Cleaning Phase: Completed  
-- Logistic Regression Baseline: Completed  
-- Random Forest + Feature Importance: Coming next  
-- XGBoost + Feature Importance: Coming Soon
-- EDA Visuals: Will be integrated into final documentation  
+- ✅ Data Cleaning Phase: Completed  
+- ✅ Logistic Regression, Random Forest, XGBoost, and KNN: Completed  
+- 🔄 SHAP, PDP, and feature importance insights: Coming next  
+- 📊 Final report and README polishing: In progress  
