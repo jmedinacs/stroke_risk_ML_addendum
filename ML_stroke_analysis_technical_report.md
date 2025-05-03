@@ -172,3 +172,4 @@ In this two-stage ensemble, all positive predictions from the recall-focused mod
 
 **Final Report and modeling log available soon.**  
 [Modeling Log (Google Sheets)](https://docs.google.com/spreadsheets/d/1pduhjQ3n5z88igfg-g8DmshraBieVE_CXnfD5TDrHlg/edit#gid=1555003253)
+[ML Technical Report] (https://jmedinacs.github.io/stroke_risk_ML_addendum/stroke_risk_ml_technical_report.pdf)
