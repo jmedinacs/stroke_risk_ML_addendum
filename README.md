@@ -1,10 +1,10 @@
 
 # Stroke Risk Prediction – Technical Summary
 
-## 🛠 Tools & Skills Demonstrated
+## Tools & Skills Demonstrated
 
 **Languages & Libraries:**  
-- Python (`pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `XGBoost`, `imbalanced-learn`, `SHAP`)  
+- Python (`pandas`, `matplotlib`, `scikit-learn`, `XGBoost`, `imbalanced-learn`, `SHAP`, `joblib`)  
 - Google Sheets (EDA planning and logs)  
 - Git/GitHub for version control  
 
@@ -24,10 +24,10 @@
 
 ---
 
-## 🔍 Problem Statement
+## Problem Statement
 Build a predictive model to estimate stroke risk using patient health and demographic data, enabling early detection and preventative care.
 
-## 📦 Dataset
+## Dataset
 - Source: [Kaggle – Stroke Prediction Dataset](https://www.kaggle.com/fedesoriano/stroke-prediction-dataset)  
 - Rows: 5,110 patients  
 - Target variable: `stroke` (0 = no, 1 = yes)  
@@ -35,14 +35,14 @@ Build a predictive model to estimate stroke risk using patient health and demogr
 
 ---
 
-## 🧹 Data Preparation
+## Data Preparation
 - Imputed 201 missing `bmi` values using the median  
 - Removed rare gender category 'Other'  
 - Standardized and trimmed all categorical text fields  
 - Applied one-hot encoding (`drop_first=True`) to nominal features  
 - Applied SMOTE to oversample minority class in the training set  
 
-## 🧪 Model Training
+## Model Training
 Trained and evaluated four models:
 - **Logistic Regression** (baseline)  
 - **Random Forest**  
@@ -58,7 +58,7 @@ All models were trained using an **80/20 stratified split** and evaluated on:
 
 ---
 
-## 🧠 Modeling Addendum (May 2025)
+## Modeling Addendum (May 2025)
 
 This extension builds on the original stroke risk analysis by training and comparing four machine learning models:
 - Logistic Regression  
@@ -75,7 +75,7 @@ Key highlights:
 
 ---
 
-## 🔍 Model Comparison
+## Model Comparison
 
 The following leaderboard compares the performance of four machine learning models on the stroke prediction task using the same test set and evaluation metrics:
 
@@ -89,7 +89,7 @@ The following leaderboard compares the performance of four machine learning mode
 
 ---
 
-### 🥇 Final Model: Tuned XGBoost Classifier
+### Final Model: Tuned XGBoost Classifier
 
 This version prioritized **recall** by adjusting class threshold after `RandomizedSearchCV` tuning. It's the most appropriate model for clinical use where missing stroke cases is costly.
 
@@ -104,7 +104,7 @@ This version prioritized **recall** by adjusting class threshold after `Randomiz
 
 ---
 
-## 🧠 Model Interpretability
+## Model Interpretability
 
 ### SHAP Summary:
 - Top positive predictors: `age`, `ever_married_yes`, `work_type_private`  
@@ -129,7 +129,7 @@ This version prioritized **recall** by adjusting class threshold after `Randomiz
 
 ---
 
-## 🔧 Project Architecture (Modularized)
+## Project Architecture (Modularized)
 - `data_preprocess.py`: Cleaning, encoding, SMOTE, scaling  
 - `train_models.py`: Trains and saves all four models  
 - `evaluate_models.py`: Loads models, evaluates, generates visuals  
