@@ -143,7 +143,7 @@ def plot_PDP(model, X_test_float, feature_name):
 
 
 
-def main():
+def evaluate_shap_and_pdp():
     model, X_test, X_test_float, y_test, original_df = load_model_and_data()
 
     # Confirm input integrity
@@ -176,4 +176,4 @@ def main():
    
 
 if __name__ == "__main__":
-    main()
+    evaluate_shap_and_pdp()

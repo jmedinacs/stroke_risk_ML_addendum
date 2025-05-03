@@ -45,7 +45,7 @@ def evaluate_model(name, model, X_test, y_test):
         "ROC AUC" : roc_auc_score(y_test, y_prob)         
     }
     
-def main():
+def initiate_model_evaluations():
     # Load preprocessed data
     X_train, X_test, y_train, y_test = preprocess_data()
     X_test
@@ -74,7 +74,7 @@ def main():
     print(leaderboard.to_string(index=False))
 
 if __name__ == "__main__":
-    main()    
+    initiate_model_evaluations()    
     
     
     
