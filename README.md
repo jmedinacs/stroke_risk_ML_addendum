@@ -119,12 +119,8 @@ Saved as: `xgboost_model_tuned.pkl`
 
 ---
 
-## ✅ Status: Ready for Review
+🚧 This branch is still under final development. SHAP + PDP interpretability, final reporting, and evaluation modularization are in progress.
 
-- 🧹 Data cleaned and transformed
-- 🧠 Models trained and compared
-- 📊 Visuals generated and saved
-- 🔍 Interpretability completed
 
 🔗 **[View model log & results →](https://docs.google.com/spreadsheets/d/1pduhjQ3n5z88igfg-g8DmshraBieVE_CXnfD5TDrHlg/edit?gid=1555003253#gid=1555003253)**
 
