@@ -93,7 +93,7 @@ The following leaderboard compares the performance of four machine learning mode
 
 This version prioritized **recall** by adjusting class threshold after `RandomizedSearchCV` tuning. It's the most appropriate model for clinical use where missing stroke cases is costly.
 
-![Confusion Matrix – Tuned XGBoost](select_viz/confusion_matrix_xgboost_tuned.png)
+![Confusion Matrix – Tuned XGBoost](select_viz/confusion_matrix_xgb_tuned.png)
 
 - **Recall**: 94%  
 - **Precision**: 8%  
