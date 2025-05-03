@@ -5,6 +5,8 @@ This script trains a baseline Logistic Regression model to predict stroke occurr
 using the cleaned and preprocessed dataset. It includes train/test split, SMOTE
 for class imbalance, model training, and performance evaluation.
 
+**NOTE First iteration of model building before modularization **
+
 Author: John Medina
 Date: 2025-04-30
 Project: Stroke Risk ML Addendum

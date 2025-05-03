@@ -132,15 +132,15 @@ def preprocess_data():
     X_train_resampled, y_train_resampled = apply_smote(X_train, y_train)
     
   
-    print("\n✅ Shapes")
+    print("\nShapes")
     print(f"X_train shape: {X_train.shape}")
     print(f"X_test shape: {X_test.shape}")
     print(f"X_train_resampled shape: {X_train_resampled.shape}")
 
-    print("\n📊 Target distribution before SMOTE (y_train):")
+    print("\nTarget distribution before SMOTE (y_train):")
     print(y_train.value_counts(normalize=True).round(3))
 
-    print("\n📊 Target distribution after SMOTE (y_train_resampled):")
+    print("\nTarget distribution after SMOTE (y_train_resampled):")
     print(y_train_resampled.value_counts(normalize=True).round(3))
     
     return X_train_resampled, X_test, y_train_resampled, y_test
