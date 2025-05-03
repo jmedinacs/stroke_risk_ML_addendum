@@ -1,8 +1,14 @@
-'''
-Created on May 2, 2025
+"""
+train_knn.py
 
-@author: jarpy
-'''
+Trains and evaluates a K-Nearest Neighbors (KNN) model for stroke prediction.
+
+This script performs preprocessing, normalization, model training,
+evaluation using classification metrics and ROC AUC, and visualizes
+and saves the confusion matrix. It also persists the trained KNN model
+and the fitted scaler for reproducibility and deployment.
+"""
+
 
 from cleaning.data_preprocess import preprocess_data, normalize_data
 from sklearn.neighbors import KNeighborsClassifier 
@@ -70,8 +76,19 @@ def create_confusion_matrix(y_test, y_pred):
 
 def train_knn_model():
     """
+    Orchestrates the full KNN pipeline for stroke classification.
+
+    Steps:
+    - Loads preprocessed data (with SMOTE applied)
+    - Normalizes features using StandardScaler
+    - Trains KNN classifier (k=5)
+    - Evaluates model on original test set
+    - Displays and saves confusion matrix
+    - Saves trained model and fitted scaler
+
+    Returns:
+        None
     """
-    
     # Retrieve training and test data splits
     X_train, X_test, y_train, y_test = preprocess_data()
     # Normalize the X training and test data
