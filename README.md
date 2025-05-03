@@ -1,5 +1,7 @@
 
-# Stroke Risk Prediction – Technical Summary
+# Stroke Risk Prediction Using Machine Learning
+*Multivariate Modeling, SHAP Explanations, and Clinical Recall Optimization*
+
 
 ## Tools & Skills Demonstrated
 
@@ -67,9 +69,9 @@ This extension builds on the original stroke risk analysis by training and compa
 - XGBoost (tuned with threshold optimization)  
 
 Key highlights:
-- **XGBoost** achieved the highest recall (0.94) and AUC (0.81) after tuning.  
-- SHAP and PDPs were used to explain model decisions and identify high-risk patient profiles.  
-- Visual insights are saved to `/select_viz/` and discussed in the final report (coming soon).  
+- **XGBoost** achieved the highest recall (from 0.48 to 0.94) and AUC (0.81) after tuning 
+- SHAP and PDPs were used to explain model decisions and identify high-risk patient profiles
+- Visual insights are saved to `/select_viz/` and discussed in the final report
 
 ✅ Tuned models and evaluation scripts are located in `/src/modeling/`
 
@@ -81,9 +83,9 @@ The following leaderboard compares the performance of four machine learning mode
 
 ![Model Evaluation Leaderboard](select_viz/model_comparison_chart.png)
 
-- **XGBoost** and **Logistic Regression** both achieved the highest recall of `0.48`, but XGBoost had a slightly higher F1 score and ROC AUC.  
-- **KNN** and **Random Forest** underperformed, particularly in recall — a critical metric for identifying high-risk stroke patients.  
-- Based on this comparison, **XGBoost** was selected for further threshold tuning and interpretability analysis using SHAP and PDP.  
+- **XGBoost** and **Logistic Regression** both achieved the highest recall of `0.48`, but XGBoost had a slightly higher F1 score and ROC AUC
+- **KNN** and **Random Forest** underperformed, particularly in recall — a critical metric for identifying high-risk stroke patients
+- Based on this comparison, **XGBoost** was selected for further threshold tuning and interpretability analysis using SHAP and PDP
 
 📌 *Note: All models were trained on the same preprocessed dataset and evaluated on the same test set.*  
 
@@ -139,8 +141,17 @@ This version prioritized **recall** by adjusting class threshold after `Randomiz
 ---
 
 **Final Report and model analysis visuals available.**  
-[view-model-log](https://docs.google.com/spreadsheets/d/1pduhjQ3n5z88igfg-g8DmshraBieVE_CXnfD5TDrHlg/edit#gid=1555003253)  
-[ML Technical Report](https://jmedinacs.github.io/stroke_risk_ML_addendum/stroke_risk_ml_technical_report.pdf)
+**[view-model-log](https://docs.google.com/spreadsheets/d/1pduhjQ3n5z88igfg-g8DmshraBieVE_CXnfD5TDrHlg/edit#gid=1555003253)**
+**[ML Technical Report](https://jmedinacs.github.io/stroke_risk_ML_addendum/stroke_risk_ml_technical_report.pdf)**
+
+---
+
+## Why This Project Matters
+
+This project simulates a high-recall clinical decision support tool for identifying patients at elevated risk of stroke. By prioritizing recall and using SHAP for explainability, the model supports early intervention — potentially helping healthcare professionals reduce stroke-related complications.
+
+---
+
 
 ## How to Use This Repository
 
