@@ -140,3 +140,41 @@ This version prioritized **recall** by adjusting class threshold after `Randomiz
 
 **Final Report and model analysis visuals available soon.**  
 For a detailed modeling log: [view-model-log](https://docs.google.com/spreadsheets/d/1pduhjQ3n5z88igfg-g8DmshraBieVE_CXnfD5TDrHlg/edit#gid=1555003253)
+
+
+## How to Use This Repository
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/stroke-risk-ml-addendum.git
+cd stroke-risk-ml-addendum
+```
+
+### 2. Install Requirements
+Create and activate a virtual environment (recommended), then install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run the Full Modeling Pipeline
+From the project root directory, execute the main pipeline controller:
+```bash
+python -m pipeline.main
+```
+
+This will:
+- Load and clean the raw dataset
+- Preprocess features (encoding, SMOTE, scaling)
+- Train and save all models (Logistic Regression, Random Forest, KNN, XGBoost)
+- Evaluate model performance (confusion matrices, metrics, comparison chart)
+- Generate SHAP summary, waterfall plots, and PDPs for the tuned model
+
+### 4. Explore Results
+Visual outputs are saved to:
+- `outputs/figures/` – Confusion matrices, comparison charts
+- `select_viz/` – SHAP & PDP interpretability plots
+
+Model files are saved in:
+- `models/` – Trained `.pkl` model files
+
+---
