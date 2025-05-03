@@ -67,11 +67,12 @@ def create_confusion_matrix(y_test, y_pred):
     disp.plot(cmap="Blues")
     plt.title("Confusion Matrix - Logistic Regression")
     plt.tight_layout()
-    plt.show()
+    
     
     # Save the figure
     os.makedirs("../../outputs/figures", exist_ok=True)
     plt.savefig("../../outputs/figures/confusion_matrix_logreg.png", dpi=300)
+    plt.show()
     print("Confusion matrix saved to /outputs/figures/")
 
 def train_logistic_regression_model():

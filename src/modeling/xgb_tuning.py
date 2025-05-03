@@ -52,6 +52,35 @@ def evaluate_thresholds(y_test, y_prob, thresholds=[0.5, 0.4, 0.3, 0.25, 0.2]):
         print(f"Precision: {precision:.3f}, Recall: {recall:.3f}, F1 Score: {f1:.3f}")
         print(f"Confusion Matrix:\n{cm}")
 
+
+def create_confusion_matrix(y_test, y_pred):
+    """
+    Generates, displays, and saves the confusion matrix for the XGBoost model.
+
+    Args:
+        y_test (pd.Series): True stroke labels from test set.
+        y_pred (np.ndarray): Predicted stroke labels from the model.
+
+    Saves:
+        Confusion matrix plot to /outputs/figures/confusion_matrix_xgb.png
+    """
+   
+    cm = confusion_matrix(y_test, y_pred)
+    
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["No Stroke","Stroke"])
+    disp.plot(cmap="Blues")
+    plt.title("Confusion Matrix - XGBoost")
+    plt.tight_layout()
+    
+    
+    # Save the figure
+    os.makedirs("../../outputs/figures", exist_ok=True)
+    plt.savefig("../../outputs/figures/confusion_matrix_xgb_tuned.png", dpi=300)
+    plt.show()
+    print("Confusion matrix saved to /outputs/figures/")
+
+
+
 def tune_xgb_model():
     """
     Performs hyperparameter tuning for XGBoost using RandomizedSearchCV,
@@ -100,6 +129,10 @@ def tune_xgb_model():
     print("\nClassification Report – Tuned XGBoost:")
     print(classification_report(y_test, y_pred, digits=3))
     print(f"ROC AUC: {roc_auc_score(y_test, y_prob):.3f}")
+    
+    create_confusion_matrix(y_test, y_pred)
+    
+    
     
     # Step 5: Threshold tuning
     evaluate_thresholds(y_test, y_prob)
