@@ -1,126 +1,142 @@
-## 🧠 Stroke Risk Prediction – Technical Summary
 
-### 🔍 Problem Statement
+# Stroke Risk Prediction – Technical Summary
+
+## 🛠 Tools & Skills Demonstrated
+
+**Languages & Libraries:**  
+- Python (`pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `XGBoost`, `imbalanced-learn`, `SHAP`)  
+- Google Sheets (EDA planning and logs)  
+- Git/GitHub for version control  
+
+**Techniques & Tests:**  
+- Feature Engineering and Data Imputation  
+- Class Imbalance Handling with SMOTE  
+- Statistical Feature Selection:  
+  - Chi-Square Test (categorical vs. binary target)  
+  - Point-Biserial Correlation (continuous vs. binary target)  
+- Machine Learning Algorithms:  
+  - Logistic Regression  
+  - Random Forest  
+  - XGBoost (with hyperparameter tuning and threshold adjustment)  
+  - K-Nearest Neighbors (with normalization)  
+- Model Evaluation: Confusion Matrix, Precision, Recall, F1, ROC AUC  
+- Model Explainability: SHAP Summary + Waterfall Plots, PDPs (Partial Dependence Plots)  
+
+---
+
+## 🔍 Problem Statement
 Build a predictive model to estimate stroke risk using patient health and demographic data, enabling early detection and preventative care.
 
-### 📦 Dataset
-- Source: [Kaggle – Stroke Prediction Dataset](https://www.kaggle.com/fedesoriano/stroke-prediction-dataset)
-- Rows: 5,110 patients
-- Target: `stroke` (0 = no, 1 = yes)
-- Class imbalance: ~5% labeled as stroke
+## 📦 Dataset
+- Source: [Kaggle – Stroke Prediction Dataset](https://www.kaggle.com/fedesoriano/stroke-prediction-dataset)  
+- Rows: 5,110 patients  
+- Target variable: `stroke` (0 = no, 1 = yes)  
+- Class imbalance: Only ~5% of rows labeled as stroke  
 
 ---
 
-### 🧹 Data Preparation
-- Imputed 201 missing `bmi` values with median
-- Removed rare gender category: `Other`
-- Cleaned and standardized all categorical fields
-- One-hot encoded nominal features (`drop_first=True`)
-- Applied **SMOTE** to balance training set
+## 🧹 Data Preparation
+- Imputed 201 missing `bmi` values using the median  
+- Removed rare gender category 'Other'  
+- Standardized and trimmed all categorical text fields  
+- Applied one-hot encoding (`drop_first=True`) to nominal features  
+- Applied SMOTE to oversample minority class in the training set  
+
+## 🧪 Model Training
+Trained and evaluated four models:
+- **Logistic Regression** (baseline)  
+- **Random Forest**  
+- **XGBoost** (baseline and tuned)  
+- **K-Nearest Neighbors** (with normalization)  
+
+All models were trained using an **80/20 stratified split** and evaluated on:
+- Recall (stroke = 1)  
+- Precision (stroke = 1)  
+- F1 Score  
+- ROC AUC  
+- Confusion Matrix  
 
 ---
 
-### 🧪 Model Training Overview
-Four models were trained on an **80/20 stratified split** and evaluated on:
+## 🧠 Modeling Addendum (May 2025)
 
-- **Logistic Regression** (baseline)
-- **Random Forest**
-- **XGBoost** (baseline and tuned)
-- **K-Nearest Neighbors (KNN)**
+This extension builds on the original stroke risk analysis by training and comparing four machine learning models:
+- Logistic Regression  
+- Random Forest  
+- K-Nearest Neighbors (KNN)  
+- XGBoost (tuned with threshold optimization)  
 
-Metrics:
-- **Recall** (stroke = 1)
-- Precision
-- F1 Score
-- ROC AUC
-- Confusion Matrix
+Key highlights:
+- **XGBoost** achieved the highest recall (0.94) and AUC (0.81) after tuning.  
+- SHAP and PDPs were used to explain model decisions and identify high-risk patient profiles.  
+- Visual insights are saved to `/select_viz/` and discussed in the final report (coming soon).  
 
----
-
-## 🚀 Modeling Addendum (May 2025)
-
-This extension added tuning, interpretability, and comparisons across all models.
-
-Key updates:
-- **XGBoost** achieved the **highest recall (0.94)** and **best AUC (0.81)** after tuning.
-- Used **SHAP** and **Partial Dependence Plots (PDPs)** to interpret model behavior.
-- Visuals saved in `/select_viz/`, code in `/src/modeling/`.
+✅ Tuned models and evaluation scripts are located in `/src/modeling/`
 
 ---
 
-## 📊 Model Comparison
+## 🔍 Model Comparison
+
+The following leaderboard compares the performance of four machine learning models on the stroke prediction task using the same test set and evaluation metrics:
 
 ![Model Evaluation Leaderboard](select_viz/model_comparison_chart.png)
 
-- **XGBoost** and **Logistic Regression** tied in recall (`0.48`), but XGBoost outperformed on F1 and AUC.
-- **KNN** and **Random Forest** underperformed on recall — a key metric in stroke detection.
-- XGBoost was selected for tuning, threshold analysis, and SHAP interpretation.
+- **XGBoost** and **Logistic Regression** both achieved the highest recall of `0.48`, but XGBoost had a slightly higher F1 score and ROC AUC.  
+- **KNN** and **Random Forest** underperformed, particularly in recall — a critical metric for identifying high-risk stroke patients.  
+- Based on this comparison, **XGBoost** was selected for further threshold tuning and interpretability analysis using SHAP and PDP.  
 
-📌 *All models were trained and evaluated on the same preprocessed data.*
-
----
-
-### 🥈 Original Champion: XGBoost (Baseline)
-- Balanced performance across metrics  
-- Good general-purpose model
-
-**Metrics:**
-- Recall: 48%  
-- Precision: 18.8%  
-- F1 Score: 27%  
-- ROC AUC: 80.6%  
-Saved as: `xgboost_model.pkl`
+📌 *Note: All models were trained on the same preprocessed dataset and evaluated on the same test set.*  
 
 ---
 
-### 🥇 Final Champion: XGBoost (Recall-Optimized)
-- Tuned with `RandomizedSearchCV`
-- Threshold set to `0.5` for max detection  
-- Prioritized **minimizing false negatives**
+### 🥇 Final Model: Tuned XGBoost Classifier
 
-**Metrics:**
-- Recall: **94%**
-- Precision: 8%
-- F1 Score: 14.8%
-- ROC AUC: 80.7%  
-Saved as: `xgboost_model_tuned.pkl`
+This version prioritized **recall** by adjusting class threshold after `RandomizedSearchCV` tuning. It's the most appropriate model for clinical use where missing stroke cases is costly.
 
-> Detected **47 of 50** stroke cases – appropriate for clinical scenarios.
+![Confusion Matrix – Tuned XGBoost](select_viz/confusion_matrix_xgboost_tuned.png)
 
----
+- **Recall**: 94%  
+- **Precision**: 8%  
+- **F1 Score**: 14.8%  
+- **ROC AUC**: 80.7%  
 
-### 🧠 Model Interpretability
-
-**SHAP Summary:**
-- Top contributors: `age`, `ever_married_yes`, `work_type_private`
-- `Heart_disease` played a smaller role than expected (age confounding)
-
-**SHAP Waterfalls:**
-- Visualized examples at **high**, **moderate**, and **low** stroke risk
-
-**Partial Dependence Plots:**
-- `Age`: Stroke risk climbs steeply from mid-40s
-- `Glucose`: Risk spikes below average, plateaus above
-- `BMI`: Risk increases > 23, levels around 30–40
+> Detected **47 out of 50** stroke cases on test set.
 
 ---
 
-## 🧱 Project Architecture (Modularized)
+## 🧠 Model Interpretability
 
-| Module | Description |
-|--------|-------------|
-| `data_preprocess.py` | Cleans, encodes, balances data |
-| `train_logistic_regression.py` | Trains and saves logistic regression |
-| `train_random_forest.py` | Trains and saves random forest |
-| `train_knn.py` | Trains and saves KNN (with scaling) |
-| `train_xgboost.py` | Trains and saves XGBoost baseline |
-| `tune_xgboost.py` | Performs hyperparameter tuning |
-| `shap_and_pdp.py` | Generates SHAP & PDP visuals |
+### SHAP Summary:
+- Top positive predictors: `age`, `ever_married_yes`, `work_type_private`  
+- Features like `heart_disease` had less impact than expected due to age confounding  
+
+![SHAP - Summary Chart](select_viz/shap_feature_importance.png)
+
+### SHAP Waterfall:
+- Visualized high-risk, moderate-risk, and low-risk cases  
+- Clear demonstration of feature contributions at the individual level 
+
+![SHAP - Example](select_viz/shap_high_risk.png) 
+![SHAP - Example](select_viz/shap_moderate_risk.png) 
+![SHAP - Example](select_viz/shap_low_risk.png) 
+
+### PDP (Partial Dependence Plots):
+- `Age`: Sharp increase in stroke risk starting in mid-40s  
+- `Glucose`: Spike in risk at low levels, flat afterward  
+- `BMI`: Risk increases above BMI 23, plateaus around 30–40  
+
+![PDP - Example](select_viz/pdp_age.png) 
 
 ---
 
-🚧 This branch is still under final development. SHAP + PDP interpretability, final reporting, and evaluation modularization are in progress.
+## 🔧 Project Architecture (Modularized)
+- `data_preprocess.py`: Cleaning, encoding, SMOTE, scaling  
+- `train_models.py`: Trains and saves all four models  
+- `evaluate_models.py`: Loads models, evaluates, generates visuals  
+- `shap_and_pdp.py`: Model interpretability via SHAP + PDPs  
+- `model_driver.py`: Central controller to run training or evaluation  
 
+---
 
-🔗 **[View model log & results →](https://docs.google.com/spreadsheets/d/1pduhjQ3n5z88igfg-g8DmshraBieVE_CXnfD5TDrHlg/edit?gid=1555003253#gid=1555003253)**
-
+**Final Report and model analysis visuals available soon.**  
+For a detailed modeling log: [view-model-log](https://docs.google.com/spreadsheets/d/1pduhjQ3n5z88igfg-g8DmshraBieVE_CXnfD5TDrHlg/edit#gid=1555003253)
