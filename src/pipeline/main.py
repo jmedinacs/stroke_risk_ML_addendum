@@ -21,12 +21,12 @@ from modeling.shap_and_pdp import evaluate_shap_and_pdp
 
 def main():
     # Step 1: Load and inspect raw data
-    df_raw = load_raw_data("data/raw/stroke_data.csv")
+    df_raw = load_raw_data("../../data/raw/stroke_data.csv")
     inspect_data(df_raw)
 
     # Step 2: Clean and save cleaned data
     df_clean = clean_data(df_raw)
-    df_clean.to_csv("data/processed/stroke_cleaned.csv", index=False)
+    df_clean.to_csv("../../data/processed/stroke_cleaned.csv", index=False)
     print("✅ Cleaned data saved.")
 
     # Step 3: Preprocess (splits, encodings, SMOTE, scaling)

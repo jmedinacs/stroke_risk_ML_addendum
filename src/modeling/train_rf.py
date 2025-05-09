@@ -70,11 +70,12 @@ def create_confusion_matrix(y_test, y_pred):
     disp.plot(cmap="Blues")
     plt.title("Confusion Matrix - Random Forest")
     plt.tight_layout()
-    plt.show()
-    
+        
     # Save the figure
     os.makedirs("../../outputs/figures", exist_ok=True)
     plt.savefig("../../outputs/figures/confusion_matrix_rf.png", dpi=300)
+    plt.show()
+    plt.close()
     print("Confusion matrix saved to /outputs/figures/")
 
 

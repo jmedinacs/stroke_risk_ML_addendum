@@ -79,6 +79,7 @@ def create_confusion_matrix(y_test, y_pred):
     os.makedirs("../../outputs/figures", exist_ok=True)
     plt.savefig("../../outputs/figures/confusion_matrix_xgb.png", dpi=300)
     plt.show()
+    plt.close()
     print("Confusion matrix saved to /outputs/figures/")
 
 def train_xgboost_model():
