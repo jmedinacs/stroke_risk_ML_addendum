@@ -14,7 +14,7 @@ Project: Stroke Risk ML Addendum
 from eda.eda_distribution import explore_numerics
 from eda.eda_categorical import explore_categoricals
 from eda.eda_bivariate_and_chi_square import run_chi_square_test
-from eda.eda_continuous_vs_stroke import run_point_biserial
+from eda.eda_point_biserial import run_point_biserial
 from eda.eda_target_distribution import explore_target_feature
 from utils.data_io import load_clean_data
 

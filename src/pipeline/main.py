@@ -30,16 +30,16 @@ def main():
     print("✅ Cleaned data saved.")
 
     # Step 3: Preprocess (splits, encodings, SMOTE, scaling)
-    X_train, X_test, y_train, y_test = preprocess_data()
+    #X_train, X_test, y_train, y_test = preprocess_data()
 
     # Step 4: Train and save all models
-    train_all_models()
+    #train_all_models()
 
     # Step 5: Evaluate all models (prints + saves visualizations)
-    initiate_model_evaluations()
+    #initiate_model_evaluations()
 
     # Step 6: SHAP + PDP interpretation for best model
-    evaluate_shap_and_pdp()
+    #evaluate_shap_and_pdp()
 
 if __name__ == "__main__":
     main()
